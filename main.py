@@ -5,6 +5,13 @@ from datetime import datetime, timezone
 from typing import Literal
 
 import dotenv
+import os
+
+# The OPENROUTER_API_KEY repo secret holds a Google AI Studio key (free tier).
+# Expose it under the env names litellm expects for the Gemini provider.
+if os.environ.get("OPENROUTER_API_KEY"):
+    os.environ.setdefault("GEMINI_API_KEY", os.environ["OPENROUTER_API_KEY"])
+    os.environ.setdefault("GOOGLE_API_KEY", os.environ["OPENROUTER_API_KEY"])
 
 # Runtime helpers (env validation, banners, dependency-warning suppression).
 from bot_helpers import (
@@ -717,20 +724,20 @@ if __name__ == "__main__":
         extra_metadata_in_explanation=True,
         llms={
             "default": GeneralLlm(
-                model="openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+                model="gemini/gemini-3.5-flash-lite",
                 temperature=0.3,
                 timeout=60,
                 allowed_tries=4,
             ),
             "summarizer": GeneralLlm(
-                model="openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+                model="gemini/gemma-4-31b-it",
                 temperature=0.3,
                 timeout=60,
                 allowed_tries=4,
             ),
-            "researcher": "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+            "researcher": "gemini/gemma-4-31b-it",
             "parser": GeneralLlm(
-                model="openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+                model="gemini/gemini-3.5-flash-lite",
                 temperature=0.3,
                 timeout=60,
                 allowed_tries=4,

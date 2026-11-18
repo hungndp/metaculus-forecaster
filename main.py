@@ -726,20 +726,20 @@ if __name__ == "__main__":
             "default": GeneralLlm(
                 model="gemini/gemini-3.5-flash-lite",
                 temperature=0.3,
-                timeout=60,
+                timeout=120,
                 allowed_tries=4,
             ),
             "summarizer": GeneralLlm(
                 model="gemini/gemma-4-31b-it",
                 temperature=0.3,
-                timeout=60,
+                timeout=120,
                 allowed_tries=4,
             ),
             "researcher": "gemini/gemma-4-31b-it",
             "parser": GeneralLlm(
                 model="gemini/gemini-3.5-flash-lite",
                 temperature=0.3,
-                timeout=60,
+                timeout=120,
                 allowed_tries=4,
             ),
         },
